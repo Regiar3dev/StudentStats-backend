@@ -41,8 +41,14 @@ func InitDB() *gorm.DB {
 func migrate() {
 	err := DB.AutoMigrate(
 		&domain.Student{},
-		// &domain.Subject{},
-		// &domain.Grade{},
+		&domain.Subject{},
+		&domain.Credential{},
+		&domain.Exam{},
+		&domain.Payment{},
+		&domain.Professor{},
+		&domain.ClassSchedule{},
+		&domain.User{},
+		&domain.Enrollment{},
 	)
 	if err != nil {
 		log.Fatal("Migration failed: ", err)
