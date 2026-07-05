@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 
-	"StudentStats-backend-go/handlers"
+	"StudentStats-backend-go/server/handlers"
 )
 
 func RegisterStudentRoutes(rg *gin.RouterGroup) {

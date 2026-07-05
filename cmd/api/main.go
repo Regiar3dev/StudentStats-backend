@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 	"github.com/gin-gonic/gin"
-	"StudentStats-backend-go/routes"
-	"StudentStats-backend-go/config"
+	"StudentStats-backend-go/server/routes"
+	"StudentStats-backend-go/server/config"
 )
 
 func main() {

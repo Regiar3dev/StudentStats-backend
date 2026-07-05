@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"StudentStats-backend-go/models"
-	"StudentStats-backend-go/services"
+	"StudentStats-backend-go/server/domain"
+	"StudentStats-backend-go/server/services"
 )
 
 type StudentHandler struct {

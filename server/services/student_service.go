@@ -1,8 +1,8 @@
 package services
 
 import (
-	"StudentStats-backend-go/models"
-	"StudentStats-backend-go/repositories"
+	"StudentStats-backend-go/server/domain"
+	"StudentStats-backend-go/server/repositories"
 )
 
 type StudentService struct {

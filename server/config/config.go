@@ -8,7 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
-	"StudentStats-backend-go/models"
+	"StudentStats-backend-go/server/domain"
 )
 
 var DB *gorm.DB

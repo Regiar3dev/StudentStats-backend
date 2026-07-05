@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"StudentStats-backend-go/config"
-	"StudentStats-backend-go/models"
+	"StudentStats-backend-go/server/config"
+	"StudentStats-backend-go/server/domain"
 )
 
 type StudentRepository struct {}
