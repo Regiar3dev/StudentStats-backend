@@ -15,14 +15,14 @@ func NewStudentService() *StudentService {
 	}
 }
 
-func (s  *StudentService) GetAll() ([]models.Student, error) {
-	return  s.repo.FindAll()
+func (s  *StudentService) GetAll(page, limit int) (*domain.Pagination, error) {
+	return  s.repo.FindAll(page, limit)
 }
 
-func (s *StudentService) GetByID(id uint) (*models.Student, error) {
+func (s *StudentService) GetByID(id uint) (*domain.Student, error) {
 	return s.repo.FindByID(id)
 }
 
-func (s *StudentService) Create(student *models.Student) error {
+func (s *StudentService) Create(student *domain.Student) error {
 	return s.repo.Create(student)
 }

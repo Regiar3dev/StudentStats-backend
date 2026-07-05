@@ -1,19 +1,24 @@
 package main
 
 import (
-	"log"
-	"github.com/gin-gonic/gin"
-	"StudentStats-backend-go/server/routes"
 	"StudentStats-backend-go/server/config"
+	"StudentStats-backend-go/server/routes"
+	"StudentStats-backend-go/server/ws"
+	"log"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
-	config.InitDB()
+	db := config.InitDB()
 
 	r := gin.Default()
+	
+	websocketHub := ws.NewHub()
+	go websocketHub.Run()
 
-	routes.Setup(r)
+	routes.Setup(r, websocketHub, db)
 
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{

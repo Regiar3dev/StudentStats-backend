@@ -20,7 +20,14 @@ func NewStudentHandler() *StudentHandler {
 }
 
 func (h *StudentHandler) GetAll(c *gin.Context) {
-	students, err := h.service.GetAll()
+	
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
+
+	if page < 1 { page = 1 }
+	if limit < 1 { limit = 10 }
+
+	students, err := h.service.GetAll(page, limit)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -39,7 +46,7 @@ func (h *StudentHandler) GetByID(c *gin.Context) {
 }
 
 func (h *StudentHandler) Create(c *gin.Context) {
-	var student models.Student
+	var student domain.Student
 	if err := c.ShouldBindJSON(&student); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

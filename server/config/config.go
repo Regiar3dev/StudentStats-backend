@@ -13,7 +13,7 @@ import (
 
 var DB *gorm.DB
 
-func InitDB() {
+func InitDB() *gorm.DB {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file: ", err)
@@ -34,13 +34,15 @@ func InitDB() {
 	log.Println("Database connection established")
 
 	migrate()
+
+	return DB
 }
 
 func migrate() {
 	err := DB.AutoMigrate(
-		&models.Student{},
-		// &models.Subject{},
-		// &models.Grade{},
+		&domain.Student{},
+		// &domain.Subject{},
+		// &domain.Grade{},
 	)
 	if err != nil {
 		log.Fatal("Migration failed: ", err)
