@@ -9,23 +9,27 @@ import (
 	"gorm.io/gorm"
 )
 
-type StudentRepository struct {}
+type StudentRepository struct {
+	DB *gorm.DB
+}
 
-func NewStudentRepository() *StudentRepository {
-	return &StudentRepository{}
+func NewStudentRepository(db *gorm.DB) *StudentRepository {
+	return &StudentRepository{
+		DB: db,
+	}
 }
 
 func (r *StudentRepository) FindAll(page, limit int) (*domain.Pagination, error) {
 	var students []domain.Student
 	var totalRecords int64
 	
-	if err := config.DB.Model(&domain.Student{}).Count(&totalRecords).Error; err != nil {
+	if err := r.DB.Model(&domain.Student{}).Count(&totalRecords).Error; err != nil {
 		return nil, err
 	}
 
 	offset := (page - 1) * limit
 
-	if err := config.DB.Limit(limit).Offset(offset).Find(&students).Error; err != nil {
+	if err := r.DB.Limit(limit).Offset(offset).Find(&students).Error; err != nil {
 		return nil, err
 	}
 
@@ -42,18 +46,18 @@ func (r *StudentRepository) FindAll(page, limit int) (*domain.Pagination, error)
 
 func (r *StudentRepository) FindByID(id uint) (*domain.Student, error) {
 	var student domain.Student
-	result := config.DB.First(&student, id)
+	result := r.DB.First(&student, id)
 	return &student, result.Error
 }
 
 func (r *StudentRepository) Create(student *domain.Student) error {
-	return config.DB.Create(student).Error
+	return r.DB.Create(student).Error
 }
 
 func (r *StudentRepository) FindByRFID(rfidUID string) (*domain.Student, error) {
 	var credential domain.Credential
 
-	err := config.DB.Preload("Student").
+	err := r.DB.Preload("Student").
 		Where("rfid_uid = ? AND is_active = ?", rfidUID, true).
 		First(&credential).Error
 
