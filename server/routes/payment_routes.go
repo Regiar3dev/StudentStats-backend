@@ -6,9 +6,7 @@ import (
 	"StudentStats-backend-go/server/handlers"
 )
 
-func RegisterPaymentRoutes(rg *gin.RouterGroup) {
-	paymentHandler := handlers.NewPaymentHandler()
-
+func RegisterPaymentRoutes(rg *gin.RouterGroup, paymentHandler *handlers.PaymentHandler) {
 	payments := rg.Group("/payments")
 	{
 		payments.GET("/", paymentHandler.GetAll)

@@ -14,9 +14,9 @@ type ExamHandler struct {
 	service *services.ExamService
 }
 
-func NewExamHandler() *ExamHandler {
+func NewExamHandler(service *services.ExamService) *ExamHandler {
 	return &ExamHandler{
-		service: services.NewExamService(),
+		service: service,
 	}
 }
 

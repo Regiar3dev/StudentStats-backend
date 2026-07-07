@@ -6,9 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterWSRoute(rg *gin.RouterGroup, handler *handlers.ScanHandler) {
+func RegisterWSRoute(rg *gin.RouterGroup, scanHandler *handlers.ScanHandler) {
 	rfid := rg.Group("/scan")
 	{
-		rfid.POST("", handler.ProcessCard)
+		rfid.POST("", scanHandler.ProcessCard)
 	}
 }

@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"StudentStats-backend-go/server/config"
 	"StudentStats-backend-go/server/domain"
 	"math"
 
@@ -12,9 +11,9 @@ type PaymentRepository struct {
 	DB *gorm.DB
 }
 
-func NewPaymentRepository() *PaymentRepository {
+func NewPaymentRepository(db *gorm.DB) *PaymentRepository {
 	return &PaymentRepository{
-		DB: config.DB,
+		DB: db,
 	}
 }
 

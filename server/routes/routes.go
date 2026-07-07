@@ -18,14 +18,14 @@ func Setup(router *gin.Engine, websocketHub *ws.Hub, db *gorm.DB) {
 	
 	api := router.Group("/api")
 	{
-		RegisterStudentRoutes(api)
-		RegisterExamRoutes(api)
-		RegisterPaymentRoutes(api)
+		repos := repositories.NewContainer(db)
+		services := services.NewContainer(repos, websocketHub)
+		handlers := handlers.NewContainer(services)
 
-		studentRepo := repositories.NewStudentRepository()
-		scanService := services.NewScanService(studentRepo, websocketHub)
-		scanHandler := handlers.NewScanHandler(scanService)
+		RegisterStudentRoutes(api, handlers.Student)
+		RegisterExamRoutes(api, handlers.Exam)
+		RegisterPaymentRoutes(api, handlers.Payment)
 
-		RegisterWSRoute(api, scanHandler)
+		RegisterWSRoute(api, handlers.Scan)
 	}
 }

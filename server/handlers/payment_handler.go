@@ -13,9 +13,9 @@ type PaymentHandler struct {
 	service *services.PaymentService
 }
 
-func NewPaymentHandler() *PaymentHandler {
+func NewPaymentHandler(service *services.PaymentService) *PaymentHandler {
 	return &PaymentHandler{
-		service: services.NewPaymentService(),
+		service: service,
 	}
 }
 

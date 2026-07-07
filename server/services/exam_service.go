@@ -9,9 +9,9 @@ type ExamService struct {
 	repo *repositories.ExamRepository
 }
 
-func NewExamService() *ExamService {
+func NewExamService(repo *repositories.ExamRepository) *ExamService {
 	return &ExamService{
-		repo: repositories.NewExamRepository(),
+		repo: repo,
 	}
 }
 

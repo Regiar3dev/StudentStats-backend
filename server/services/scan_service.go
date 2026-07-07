@@ -8,12 +8,21 @@ import (
 
 type ScanService struct {
 	studentRepo	*repositories.StudentRepository
+	examRepo	*repositories.ExamRepository
+	paymentRepo	*repositories.PaymentRepository
 	hub	*ws.Hub
 }
 
-func NewScanService(repo *repositories.StudentRepository, hub *ws.Hub) *ScanService {
+func NewScanService(
+	studentRepo *repositories.StudentRepository,
+	examRepo *repositories.ExamRepository,
+	paymentRepo *repositories.PaymentRepository,
+	hub *ws.Hub,
+) *ScanService {
 	return &ScanService{
-		studentRepo: repo,
+		studentRepo: studentRepo,
+		examRepo: examRepo,
+		paymentRepo: paymentRepo,
 		hub: hub,
 	}
 }

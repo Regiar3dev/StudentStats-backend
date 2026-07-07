@@ -13,9 +13,9 @@ type StudentHandler struct {
 	service *services.StudentService
 }
 
-func NewStudentHandler() *StudentHandler {
+func NewStudentHandler(service *services.StudentService) *StudentHandler {
 	return &StudentHandler{
-		service: services.NewStudentService(),
+		service: service,
 	}
 }
 

@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"StudentStats-backend-go/server/config"
 	"StudentStats-backend-go/server/domain"
 	"errors"
 	"math"
@@ -13,9 +12,9 @@ type StudentRepository struct {
 	DB *gorm.DB
 }
 
-func NewStudentRepository() *StudentRepository {
+func NewStudentRepository(db *gorm.DB) *StudentRepository {
 	return &StudentRepository{
-		DB: config.DB,
+		DB: db,
 	}
 }
 

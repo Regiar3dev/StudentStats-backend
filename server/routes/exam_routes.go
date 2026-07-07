@@ -6,9 +6,7 @@ import (
 	"StudentStats-backend-go/server/handlers"
 )
 
-func RegisterExamRoutes(rg *gin.RouterGroup) {
-	examHandler := handlers.NewExamHandler()
-
+func RegisterExamRoutes(rg *gin.RouterGroup, examHandler *handlers.ExamHandler) {
 	exams := rg.Group("/exams")
 	{
 		exams.GET("/", examHandler.GetAll)
