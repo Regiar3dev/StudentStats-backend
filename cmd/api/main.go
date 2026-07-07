@@ -7,18 +7,21 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
-func main() {
+var DB *gorm.DB
 
-	db := config.InitDB()
+func main() {
+	
+	DB = config.InitDB()
 
 	r := gin.Default()
 	
 	websocketHub := ws.NewHub()
 	go websocketHub.Run()
 
-	routes.Setup(r, websocketHub, db)
+	routes.Setup(r, websocketHub, DB)
 
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{

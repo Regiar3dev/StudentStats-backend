@@ -13,9 +13,9 @@ type StudentRepository struct {
 	DB *gorm.DB
 }
 
-func NewStudentRepository(db *gorm.DB) *StudentRepository {
+func NewStudentRepository() *StudentRepository {
 	return &StudentRepository{
-		DB: db,
+		DB: config.GetDB(),
 	}
 }
 

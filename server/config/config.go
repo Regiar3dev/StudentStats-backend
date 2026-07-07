@@ -38,6 +38,10 @@ func InitDB() *gorm.DB {
 	return DB
 }
 
+func GetDB() *gorm.DB {
+	return nil
+}
+
 func migrate() {
 	err := DB.AutoMigrate(
 		&domain.Student{},

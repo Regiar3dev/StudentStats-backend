@@ -19,8 +19,9 @@ func Setup(router *gin.Engine, websocketHub *ws.Hub, db *gorm.DB) {
 	api := router.Group("/api")
 	{
 		RegisterStudentRoutes(api)
+		RegisterExamRoutes(api)
 
-		studentRepo := repositories.NewStudentRepository(db)
+		studentRepo := repositories.NewStudentRepository()
 		scanService := services.NewScanService(studentRepo, websocketHub)
 		scanHandler := handlers.NewScanHandler(scanService)
 
