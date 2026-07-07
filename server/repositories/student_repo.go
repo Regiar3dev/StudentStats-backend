@@ -15,7 +15,7 @@ type StudentRepository struct {
 
 func NewStudentRepository() *StudentRepository {
 	return &StudentRepository{
-		DB: config.GetDB(),
+		DB: config.DB,
 	}
 }
 

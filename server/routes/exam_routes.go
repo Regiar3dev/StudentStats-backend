@@ -16,4 +16,3 @@ func RegisterExamRoutes(rg *gin.RouterGroup) {
 		exams.POST("/", examHandler.Create)
 	}
 }
-
