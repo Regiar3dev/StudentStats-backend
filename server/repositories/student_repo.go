@@ -57,7 +57,7 @@ func (r *StudentRepository) FindByRFID(rfidUID string) (*domain.Student, error) 
 	var credential domain.Credential
 
 	err := r.DB.Preload("Student").
-		Where("rfid_uid = ? AND is_active = ?", rfidUID, true).
+		Where("rf_id_uid = ? AND is_active = ?", rfidUID, true).
 		First(&credential).Error
 
 	if err != nil {

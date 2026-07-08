@@ -1,9 +1,11 @@
 package services
 
 import (
-	"errors"
 	"StudentStats-backend-go/server/repositories"
 	"StudentStats-backend-go/server/ws"
+	"encoding/json"
+	"errors"
+	"fmt"
 )
 
 type ScanService struct {
@@ -46,6 +48,14 @@ func (s *ScanService) ExecuteScan(rfidUID string, deviceID string) error {
 			"fecha": "--/--/----",
 		},
 		"pending_payments_amount": 0,
+	}
+
+	bytes, err := json.MarshalIndent(screenPayload, "", "    ")
+	if err != nil {
+		fmt.Printf("Error al formatear el payload: %v\n", err)
+	} else {
+		fmt.Println("\n📺 [WS PAYLOAD] Enviando a la pantalla:")
+		fmt.Println(string(bytes))
 	}
 
 	sent := s.hub.SendToDevice(deviceID, screenPayload)
